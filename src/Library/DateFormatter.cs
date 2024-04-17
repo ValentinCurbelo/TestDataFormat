@@ -1,4 +1,6 @@
-﻿namespace Ucu.Poo.TestDateFormat;
+﻿using System.Text.RegularExpressions;
+
+namespace Ucu.Poo.TestDateFormat;
 
 /// <summary>
 /// Esta clase implementa la funcionalidad de cambiar el formato de una fecha.
@@ -15,6 +17,22 @@ public class DateFormatter
     /// <returns>La fecha convertida al formato "yyyy-mm-dd".</returns>
     public static string ChangeFormat(string date)
     {
+        if (string.IsNullOrEmpty(date))
+        {
+            return string.Empty;
+        }         
+        
+        if (!Regex.IsMatch(date, @"^\d{2}/\d{2}/\d{4}$"))
+        {
+            return string.Empty; 
+        }
+
+        if (date.Length != 10)
+        {
+            return string.Empty;
+        }
+        
         return date.Substring(6) + "-" + date.Substring(3, 2) + "-" + date.Substring(0, 2);
     }
+
 }
